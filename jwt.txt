@@ -1,0 +1,2 @@
+https://asfo.medium.com/autenticando-un-api-rest-con-nodejs-y-jwt-json-web-tokens-5f3674aba50e
+https://www.geeksforgeeks.org/jwt-authentication-with-node-js/#:~:text=JSON%20Web%20Token%20is%20an,storing%20sessions%20on%20the%20server.
