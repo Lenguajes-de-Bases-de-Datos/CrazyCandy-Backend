@@ -1,12 +1,10 @@
 const express = require('express');
 const app = express();
 const router = express.Router();
-var jwt=require("jsonwebtoken");
-// const redis = require('redis');
-// const JWT = require('jwt-redis').default;
-// const redisClient = redis.createClient();
-// jwt = new JWT(redisClient);
+var redis = require('redis');
+var JWTR = require('jwt-redis').default;
 
+ var jwt=require("jsonwebtoken");
 
 const configs = require('../config/configs');
 const query = require('../database/querys');
@@ -65,12 +63,11 @@ router.post('/login', async(req, res)=> {
       var resp = await query.query(`SELECT * FROM usuario WHERE nombre='${user.nombre}' and password=sha2('${user.password}',256)`);
       if(resp.length>0){//significa que se autentica correctamente...
         //generamos el token...
-        console.log("si")
+        
         json = JSON.stringify(resp); 
         console.log(json);
         parse=JSON.parse(json)
-        console.log(parse[0].nombre);
-        
+       
         mykey = configs.llave;
         let payload = {
           user:parse[0].nombre,
@@ -83,7 +80,7 @@ router.post('/login', async(req, res)=> {
         // });
        
         var token = jwt.sign(payload,mykey,{
-             expiresIn:'30s'
+             expiresIn:'10m'
           })
   
 
@@ -137,7 +134,7 @@ router.get('/validate',(req,res,next)=>{
   const token = req.headers['crazys'];
   if(token){
     jwt.verify(token,mykey,(err,decoded)=>{
-      console.log("token: "+token);
+      
       if (err) {
         return res.status(401).json({ mensaje: 'Token inválida '+err });    
       } else {
@@ -154,5 +151,19 @@ router.get('/validate',(req,res,next)=>{
     }
 
 });
+
+router.post('/logout',(req,res)=>{
+
+
+});
+router.post('/insert',(req,res)=>{
+  params = req.params;
+  let sql = `INSERT INTO ${req.body.table} (ID,ID_sucursal,password,nombre,appat,apmat,privilegios,caja)
+  VALUES(ID,'${req.body.ID_sucursal}','${req.body.password}','${req.body.nombre}','${req.body.appat}',
+  '${req.body.apmat}','${req.body.privilegios}','${req.body.caja}')`;
+});
+
+
+
 
 module.exports=router;
