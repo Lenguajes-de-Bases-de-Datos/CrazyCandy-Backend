@@ -19,16 +19,19 @@ rutasProtegidas.use((req, res, next) => {
   const token = req.headers['crazys'];
   if(token){
     jwt.verify(token,mykey,(err,decoded)=>{
-      console.log("token: "+token);
+      console.log("Rutas protegidas: ");
       if (err) {
-        return res.json({ mensaje: 'Token inválida '+err });    
+        console.log("SI: ");
+        res.status(401).json({ mensaje: 'Token inválida '+err });       
       } else {
+        console.log("NOP: ");
         req.decoded = decoded;    
         next();
-        return res.send("successfully");
+         
       }
     });
   }else {
+    console.log("Token np: ");
       res.send({ 
           mensaje: 'Token no proveída.' 
       });
@@ -72,6 +75,7 @@ router.post('/login', async(req, res)=> {
         let payload = {
           user:parse[0].nombre,
           id:parse[0].ID,
+          privilegios:parse[0].privilegios,
           time:Date()
         };
         let datos = parse[0];
@@ -80,7 +84,7 @@ router.post('/login', async(req, res)=> {
         // });
        
         var token = jwt.sign(payload,mykey,{
-             expiresIn:'10m'
+             expiresIn:'1m'
           })
   
 
@@ -156,13 +160,29 @@ router.post('/logout',(req,res)=>{
 
 
 });
-router.post('/insert',(req,res)=>{
+router.post('/insertUser',rutasProtegidas,(req,res)=>{
   params = req.params;
-  let sql = `INSERT INTO ${req.body.table} (ID,ID_sucursal,password,nombre,appat,apmat,privilegios,caja)
-  VALUES(ID,'${req.body.ID_sucursal}','${req.body.password}','${req.body.nombre}','${req.body.appat}',
-  '${req.body.apmat}','${req.body.privilegios}','${req.body.caja}')`;
+  console.log("body"+req.body)
+  let sql = `INSERT INTO usuario (ID,ID_sucursal,password,nombre,appat,apmat,privilegios,des,email)
+  VALUES(ID,${req.body.ID_sucursal},sha2('${req.body.password}',256),'${req.body.nombre}','${req.body.appat}',
+  '${req.body.apmat}','${req.body.privilegios}','${req.body.des}','${req.body.email}')`;
+  query.query(sql).then((resp)=>{
+    console.log("1 record insert successfully");
+    res.send({band:true});
+  }).catch((err)=>{
+    console.log(err);
+  })
 });
-
+router.get('/readSucursal',rutasProtegidas,(req,res)=>{
+   let sql = `SELECT b.id,a.estado,a.ciudad,a.colonia,b.calle,b.numero FROM ubicacion a,sucursal b WHERE a.id=b.id_ubicacion`; 
+   query.query(sql).then((resp)=>{
+    let results = JSON.stringify(resp); 
+    console.log(results);
+    res.send(results);
+  }).catch((err)=>{
+    console.log(err);
+  });
+});
 
 
 
