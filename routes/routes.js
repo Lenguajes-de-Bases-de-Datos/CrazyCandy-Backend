@@ -63,7 +63,7 @@ router.post('/login', async(req, res)=> {
     // res.send('Hola Mundo!');
     try{
       var user = req.body;
-      var resp = await query.query(`SELECT * FROM usuario WHERE nombre='${user.nombre}' and password=sha2('${user.password}',256)`);
+      var resp = await query.query(`SELECT * FROM usuario WHERE email='${user.nombre}' and password=sha2('${user.password}',256)`);
       if(resp.length>0){//significa que se autentica correctamente...
         //generamos el token...
         
@@ -73,7 +73,7 @@ router.post('/login', async(req, res)=> {
        
         mykey = configs.llave;
         let payload = {
-          user:parse[0].nombre,
+          user:parse[0].email,
           id:parse[0].ID,
           privilegios:parse[0].privilegios,
           time:Date()
@@ -84,7 +84,7 @@ router.post('/login', async(req, res)=> {
         // });
        
         var token = jwt.sign(payload,mykey,{
-             expiresIn:'1m'
+             expiresIn:'10m'
           })
   
 
@@ -163,9 +163,9 @@ router.post('/logout',(req,res)=>{
 router.post('/insertUser',rutasProtegidas,(req,res)=>{
   params = req.params;
   console.log("body"+req.body)
-  let sql = `INSERT INTO usuario (ID,ID_sucursal,password,nombre,appat,apmat,privilegios,des,email)
+  let sql = `INSERT INTO usuario (ID,ID_sucursal,password,nombre,appat,apmat,privilegios,des,email,telefono)
   VALUES(ID,${req.body.ID_sucursal},sha2('${req.body.password}',256),'${req.body.nombre}','${req.body.appat}',
-  '${req.body.apmat}','${req.body.privilegios}','${req.body.des}','${req.body.email}')`;
+  '${req.body.apmat}','${req.body.privilegios}','${req.body.des}','${req.body.email}','${req.body.telefono}')`;
   query.query(sql).then((resp)=>{
     console.log("1 record insert successfully");
     res.send({band:true});

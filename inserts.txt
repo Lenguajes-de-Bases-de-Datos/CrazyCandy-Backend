@@ -1,0 +1,81 @@
+
+//Insert para ubicación
+(id,'Aguascalientes','Aguascalientes','Fatima','20130'),
+(id,'Chihuahua','Chihuahua','Independencia','2000'),
+(id,'Chihuahua','Ahumada','Revolución','15243'),
+(id,'Aguascalientes','San pancho','Reales','79896'),
+(id,'Aguascalientes','Calvillo','Rio azul','78410'),
+(id,'Cd Mexico','Gustavo A. Madero','Juarez','14569'),
+(id,'Cd Mexico','Iztapalapa','Zaragoza','74183'),
+(id,'Michoacan','Morelia','Estudiantes','43197'),
+(id,'Michoacan','Uruapan','Hidalgo','93752'),
+(id,'Zacatecas','Guadalupe','Revolucion','97453'),
+(id,'Aguascalientes','Aguascalientes','Sab J. Arenal','20130'),
+(id,'California USA','Los Angeles','Misuri','75123'),
+(id,'Minnesota USA','Minneapolis','Central ave SE','55407'),
+(id,'Yuzhong China','Lanzhou','Gansu','730199'),
+(id,'Nagano Japon','Sako','Nakagomi','30201')
+
+//Insert para sucursal.
+(id,11,'Av. Universidad',630,'449-145-78-95','crazyuni@gmail.com',1,'9:00:00','22:00:00'),
+(id,2,'Heroes',455,'659-458-75-15','crazyheroes@gmail.com',1,'9:00:00','21:00:00'),
+(id,3,'Caracas',758,'659-784-12-51','crazycaracas@gmail.com',1,'9:00:00','22:00:00'),
+(id,4,'Hernan',65,'449-821-46-52','crazypancho@gmail.com',1,'9:00:00','21:00:00'),
+(id,5,'Huerta',45,'449-102-30-40','crazycalvillo@gmail.com',1,'9:00:00','22:00:00'),
+(id,6,'Guerreros',782,'461-758-94-42','crazymadero@gmail.com',1,'8:00:00','22:00:00'),
+(id,7,'Jimenez',701,'461-654-98-12','crazyiztapalapa@gmail.com',1,'9:00:00','21:00:00'),
+(id,8,'Magallanez',305,'313-513-74-20','crazymich@gmail.com',1,'8:00:00','20:00:00'),
+(id,10,'Villa',145,'496-784-96-32','crazyzac@gmail.com',1,'9:00:00','21:00:00'),
+(id,1,'Av. Interceptor',888,'449-872-45-98','crazyint@gmail.com',1,'9:00:00','22:00:00')
+
+//insert para usuario...
+(id,1,sha2('hola123',256),'Hector','Perez','Lopez','reponedor','Tiempo completo','hect11@outlook.com',1,0,'default.png','449-789-52-45'),
+(id,1,sha2('ana123',256),'Ana Maria','Reyes','Hernandez','vendedor','Tiempo medio','Mariaes@protonmail.com',1,0,'default.png','449-852-78-44'),
+(id,1,sha2('juan673',256),'Juan Carlos','Alonso','Bravo','administrador','Tiempo completo','Juka@gmail.com',1,0,'default.png','449-874-00-41'),
+(id,1,sha2('rock45',256),'Ricardo','Perez','Reynoso','almacenista','Tiempo completo','Riki@gmail.com',1,0,'default.png','449-478-08-45'),
+(id,1,sha2('Sam14',256),'Samantha','Esparragoza','Delgado','vendedor','Tiempo completo','Sami@gmail.com',1,0,'default.png','449-144-80-78'),
+(id,1,sha2('Manuel123',256),'Manuel','Bravo','Cisneros','almacenista','Tiempo completo','Manue@gmail.com',1,0,'default.png','449-150-47-44'),
+(id,1,sha2('Teresa121',256),'Teresa','Villalpando','Cruz','reponedor','Tiempo completo','Tere11@outlook.com',1,0,'default.png','449-754-05-01'),
+(id,1,sha2('kiri12',256),'Kirito','Honda','Akiriyama','vendedor','Tiempo completo','Kiri56@gmail.com',1,0,'default.png','449-044-87-47'),
+(id,1,sha2('Yadira12',256),'Yadira','Esparza','Guzman','almacenista','Tiempo medio.','Yadi@gmail.com',1,0,'default.png','449-888-74-55'),
+(id,1,sha2('Lola22',256),'Lolita','Reyes','Torres','vendedor','Tiempo Completo.','Lolii@gmail.com',1,0,'default.png','449-111-47-54')
+
+//sucursal 2...
+(id,2,sha2('Enrique12',256),'Luis Enrique','Lopez','Almada','reponedor','Tiempo completo.','Lenrique@outlook.com',1,0,'default.png','658-789-98-88'),
+(id,2,sha2('Raul98',256),'Raul','Martinez','Contreras','administrador','Tiempo completo.','Raul115@gmail.com',1,0,'default.png','685-452-81-00'),
+(id,2,sha2('Jessica11',256),'Jessica','Villalpando','Juarez','vendedor','Tiempo completo.','Jessi8@outlook.com',1,0,'default.png','685-854-11-99'),
+(id,2,sha2('Almendra11',256),'Almendra','Rodriguez','Gutierrez','vendedor','Tiempo completo.','Alme12@gmail.com',1,0,'default.png','685-952-12-33'),
+(id,2,sha2('Maria88',256),'Maria','Torres','Martinez','vendedor','Tiempo completo.','Mariii88@gmail.com',1,0,'default.png','685-981-00-20'),
+(id,2,sha2('Jony99',256),'Jony','Beltran','Leiva','reponedor','Tiempo completo.','jony11i@gmail.com',1,0,'default.png','685-487-30-00'),
+(id,2,sha2('Felo11',256),'Felipe','Cruz','Guzman','almacenista','Tiempo completo.','Felo12@outlook.com',1,0,'default.png','685-258-16-91'),
+(id,2,sha2('Juanc11',256),'Juan','Guevara','Ruiseñor','almacenista','Tiempo completo.','Juanitoalimania@gmail.com',1,0,'default.png','685-951-19-43'),
+(id,2,sha2('Guille11',256),'Guillermo','Vazquez','Alonso','reponedor','Tiempo completo.','Guille14@outlook.com',1,0,'default.png','685-025-85-20'),
+(id,2,sha2('Mabel11',256),'Mabel','Magon','Hernandez','almacenista','Tiempo completo.','Mabii12@gmail.com',1,0,'default.png','685-951-03-08')
+
+//insert proveedores...
+(id,10,'Dulces de la Rosa','Juan','Reynoso','Higareda','Mijarez',788,'Proveedor por mayoreo.','Delarosa11@outlook.com',1,'496-996-88-77'),
+(id,12,'Super sweets','Smith','White','Brady','Life',411,'Proveedor extranjero por mayoreo.','sweets12@gmail.com',1,'814-78-95-66'),
+(id,15,'Dulces Japoneses','Asuna','Kiribama','Yahoko','Esencia',777,'Proveedor extranjero.','Djapon@gmail.com',1,'267-54-70-11'),
+(id,14,'Dulces Chinos','Kasuto','Atoriyama','Kamazaky','Legendaria',877,'Proveedor extranjero.','Dchinos@gmail.com',1,'241-881-77-22'),
+(id,13,'Tasty sweets','Tom','Staham','Freed','Shine',72,'Proveedor extranjero.','TastySweets@gmail.com',1,'805-557-44-88')
+
+
+//insert categoria....
+(id,'Chocolates',5,7,1),
+(id,'Mazapanes',8,8,1),
+(id,'Chetos',1,4,1),
+(id,'Bebidas',9,11,1),
+(id,'Dulces Chinos',12,14,1),
+(id,'Dulces Japoneses',15,17,1),
+(id,'Dulces Americanos',18,20,1),
+(id,'Salsas',21,21,1),
+(id,'Adornos',22,22,1),
+(id,'Arreglos',23,23,1)
+
+//insert producto...
+(id,1,'Caja de Mazapanes','',30.5,1,'mazapan.jpg',20)
+(id,1,'Caja de Mazapanes de Chocolate','',40.5,1,'mazapan-chocolate.jpg',20)
+
+
+ insert into producto(id,categoria,nombre,descripcion,precioUnitario,status,imagen,piezas) values (id,1,'Caja de Mazapanes','',30.5,1,'mazapan.jpg',20);
+
