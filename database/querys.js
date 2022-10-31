@@ -7,7 +7,7 @@ const {mysql,con}=require("./connection");
         con.query(sql
             , function (err, result,fields) {
             console.log("1")
-                if (err) throw err;
+                if (err) reject(err);
                     resolve(result);
             }
         );
