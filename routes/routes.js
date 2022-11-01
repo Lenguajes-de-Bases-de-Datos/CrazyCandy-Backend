@@ -184,6 +184,25 @@ router.get('/readSucursal',rutasProtegidas,(req,res)=>{
   });
 });
 
+router.post('/readUser',(req,res)=>{
+  let nombre = req.body.user;
+  let id = req.body.id_user;
+  //params = req.params;
+  //console.log("body"+req.body);
+  //let sql = `SELECT nom_comp FROM nombres where nom_comp like '%${req.nom}%`;
+  console.log("Nombre: "+nombre+" Id: "+id);
+  console.log("BODY "+req.body.user);
+  console.log("PARAMS "+req.params.user+"     "+req.params.id_user)
+  let sql = `SELECT * FROM usuario`;
+  /*query.query(sql).then((resp)=>{
+    let results = JSON.stringify(resp); 
+    console.log(results);
+    res.send(results);
+  }).catch((err)=>{
+    console.log(err);
+  });*/
+});
+
 
 
 module.exports=router;
