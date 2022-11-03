@@ -185,14 +185,23 @@ router.get('/readSucursal',rutasProtegidas,(req,res)=>{
 });
 
 router.post('/readUser',(req,res)=>{
-  //params = req.params;
-  //console.log("body"+req.body);
-  //let sql = `SELECT nom_comp FROM nombres where nom_comp like '%${req.nom}%`;
-  let sql = `SELECT * FROM usuario`;
+  let sql="";
+  console.log(req.body);
+  let nombre = req.body.nombre;
+  let id = req.body.id;
+  if(nombre!=null){
+    sql = `SELECT b.*, a.ID FROM nombresusuario a, usuario b where a.nom_comp like '%${nombre}%' and b.ID=a.ID`;
+    console.log("Se fue por el nombre");
+  }else{
+    sql = `SELECT * FROM usuario where id=${id}`;
+    console.log("Se fue por el ID");
+  }
+  
   query.query(sql).then((resp)=>{
     let results = JSON.stringify(resp); 
     console.log(results);
-    res.send(results);
+    res.send({resultado: results, 
+              band:true});
   }).catch((err)=>{
     console.log(err);
   });
