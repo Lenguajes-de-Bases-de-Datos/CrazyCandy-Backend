@@ -76,6 +76,7 @@ router.post('/login', async(req, res)=> {
           user:parse[0].email,
           id:parse[0].ID,
           privilegios:parse[0].privilegios,
+          sucursal:parse[0].ID_sucursal,
           time:Date()
         };
         let datos = parse[0];
@@ -177,11 +178,41 @@ router.get('/readSucursal',rutasProtegidas,(req,res)=>{
    let sql = `SELECT b.id,a.estado,a.ciudad,a.colonia,b.calle,b.numero FROM ubicacion a,sucursal b WHERE a.id=b.id_ubicacion`; 
    query.query(sql).then((resp)=>{
     let results = JSON.stringify(resp); 
+    
+    res.send(results);
+  }).catch((err)=>{
+    console.log(err);
+  });
+});
+//##################################################
+//################################################
+///parte de categoria....
+router.post('/insertar-categoria',rutasProtegidas,(req,res)=>{
+  let sql = `INSERT INTO categoria(id,ncategoria,pasilloInicio,pasilloFin) VALUES 
+  (id,'${req.body.nombre}',${req.body.pasilloInicio},${req.body.pasilloFin})`;
+  query.query(sql).then((resp)=>{
+    console.log("1 record insert successfully");
+    res.send({band:true});
+  }).catch((err)=>{
+    console.log(err);
+  });
+
+});
+router.get('/consultar-categorias',rutasProtegidas,(req,res)=>{
+  let sql = `SELECT * FROM categoria`;
+  query.query(sql).then((resp)=>{
+    let results = JSON.stringify(resp); 
     console.log(results);
     res.send(results);
   }).catch((err)=>{
     console.log(err);
   });
+
+});
+
+router.post('/consulta-uncategoria',rutasProtegidas,(req,res)=>{
+
+  let sql = `SELECT * FROM categoria WHERE id=${req.body.id}`;
 });
 
 router.post('/readUser',(req,res)=>{
@@ -208,5 +239,28 @@ router.post('/readUser',(req,res)=>{
 });
 
 
+router.post('/accion',(req,res)=>{
+  console.log(req.body.sql);
+  query.query(req.body.sql).then((resp)=>{
+    console.log("1 record insert successfully");
+    res.send({band:true});
+  }).catch((err)=>{
+    console.log(err);
+    res.send({band:false,errno:err.errno});
+  });
+
+
+});
+router.get('/consultas',(req,res)=>{
+
+  let sql = req.query.sql;
+  query.query(sql).then((resp)=>{
+    let results = JSON.stringify(resp); 
+    console.log(results);
+    res.send(results);
+  }).catch((err)=>{
+    console.log(err);
+  });
+});
 
 module.exports=router;
