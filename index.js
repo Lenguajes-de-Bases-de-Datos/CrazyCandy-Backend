@@ -43,18 +43,31 @@ var messages = [
 
 
 io.on("connection", function (socket) {
-  console.log("Un cliente se ha conectado");
+  
   socket.emit("messages", messages);
+  let {room} = socket.handshake.query;
+  if(!room){
+    console.log("query vacio...")
+  }else{
+    room = JSON.parse(room)
+    socket.join(`room_${room}`);
+    console.log("usuario unido a room_"+room);
 
+  }
+  console.log("Un cliente se ha conectado"+room);
+  //socket.join();
   socket.on("msg",(res)=>{
     let aux = res;
-    
+    console.log("msg:"+ JSON.stringify(res));
     let obj = {
       author:aux.author,
       text:aux.text,
-      count:1
+      count:1,
+      room:aux.room
     };
-    socket.broadcast.emit('notification',res);
+    //socket.broadcast.in(`room_${res.room}`).emit('notification',res);
+    io.to(`room_${res.room}`).emit('notification',res);
+    //socket.broadcast.emit('notification',res);
     });
 });
 

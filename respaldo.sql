@@ -29,7 +29,7 @@ CREATE TABLE `categoria` (
   `pasilloFin` int(11) DEFAULT NULL,
   `status` tinyint(1) DEFAULT 1,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +48,9 @@ INSERT INTO `categoria` VALUES
 (7,'Dulces Americanos',18,20,1),
 (8,'Salsas',21,21,1),
 (9,'Adornos',22,22,1),
-(10,'Arreglos',23,23,1);
+(10,'Arreglos',23,23,1),
+(11,'Postres',24,24,1),
+(12,'Papas',24,24,1);
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,7 +167,7 @@ CREATE TABLE `producto` (
   KEY `pertenece` (`pertenece`),
   CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`categoria`) REFERENCES `categoria` (`ID`) ON UPDATE CASCADE,
   CONSTRAINT `producto_ibfk_2` FOREIGN KEY (`pertenece`) REFERENCES `producto` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,8 +177,41 @@ CREATE TABLE `producto` (
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
 INSERT INTO `producto` VALUES
-(1,1,'Caja de Mazapanes','',30.5000,1,'mazapan.jpg',20,NULL),
-(2,1,'Caja de Mazapanes de Chocolate','',40.5000,1,'mazapan-chocolate.jpg',20,NULL);
+(1,1,'Chocolate Resees','Chocolatina de chocolate con leche rellena de mantequilla de cacahuate',30.5000,1,'reeses.jpg',20,NULL),
+(2,1,'Chocolate Ghirardelli','Clasico sabor de chocolate con leche acompañado de caramelo suave, hecho con manteca de cacao y con relleno de caramelo cremoso una combinacion unica',30.5000,1,'ghirardelli.jpg',20,NULL),
+(3,1,'Chocolate Twix','Barra de chocolate compuesta de galleta en el centro, cubierta de caramelo y recubierta de chocolate con leche.',30.5000,1,'twix.jpg',20,NULL),
+(4,1,'Chocolate Whoppers','Bolitas de leche malteada cubiertas por una cobertura de chocolate artificial',30.5000,1,'whoppers.png',20,NULL),
+(5,1,'Chocolate Almond Joy','Cuando tu diente dulce golpea espontáneamente, hay una cosa que seguramente lo satisface: coco, almendras enteras y chocolate.',30.5000,1,'almond.jpg',20,NULL),
+(6,3,'Cheetos Puffs','El intenso sabor a queso con una textura liviana y esponjosa. Los CHEETOS® inflados, bocadillos sabor a queso, están llenos de sabor y ¡hechos con queso de verdad!',30.5000,1,'cheetospuffs.png',20,NULL),
+(7,3,'Cheetos Flamin Hot','Un sabor picante y especiado en un bocadillo crocante y con queso. Los CHEETOS® FLAMIN HOT® crocantes, bocadillos sabor a queso, están llenos de sabor y hechos con queso de verdad.',30.5000,1,'cheetosflamin.jpg',20,NULL),
+(8,3,'Cheetos Crunchy','Con una bolsa de CHEETOS® crocantes, bocadillos sabor a queso, tendrás algo delicioso, con queso y crujiente para picar. Están hechos con queso de verdad para darle muchísimo más sabor.',30.5000,1,'cheetoscrunchy.jpg',20,NULL),
+(9,3,'Cheetos XXtra Flamin Hot','El sabor extrapicante y condimentado comprimido en estos bocadillos crujientes y con queso hará que te suba la temperatura. Sentirás mucho más picor con los CHEETOS® XXTRA FLAMIN HOT® crocantes, bocadillos sabor a queso.',30.5000,1,'cheetosxxtra.jpg',20,NULL),
+(10,3,'Cheetos PopCorn','El delicioso sabor de CHEETOS® ahora viene en el clásico bocadillo que les gusta a todos: ¡las palomitas de maíz! Traen lo que ya conoces y te encanta de los CHEETOS® originales: un rico y delicioso sabor a mucho queso. Ya están listas para salir de la bolsa, con un toque extra de diversión llena de sabor, picardía y queso.',30.5000,1,'cheetospopcorn.png',20,NULL),
+(11,4,'Mtn Dew','Original Mountain Dew es un refresco con sabor a cítricos . El refresco es único porque incluye una pequeña cantidad de jugo de naranja. Si bien algunos han comparado a Mountain Dew con el refresco de lima-limón, es en gran medida distinto y único de ellos, y ha generado muchos imitadores propios.',30.5000,1,'mtndew.jpg',20,NULL),
+(12,4,'Dr Pepper','Dr Pepper es un refresco carbonatado . Fue creado en la década de 1880 por el farmacéutico Charles Alderton en Waco, Texas, y se sirvió por primera vez alrededor de 1885.',30.5000,1,'drpepper.jpg',20,NULL),
+(13,4,'Fanta Berry','Descubre este nuevo sabor de Fanta importado de los Estados Unidos. Tiene un sabor afrutado a frambuesa azul. Bebida con gas sin cafeína.',30.5000,1,'fantaberry.jpg',20,NULL),
+(14,4,'Crush','Crush ofrece una excitante ráfaga de sabor y diversión en cada sorbo. Como el refresco de naranja original, Crush tiene una larga historia de deleitar a los consumidores con una amplia gama de sabores afrutados que complacen a la multitud.',30.5000,1,'crush.jpg',20,NULL),
+(15,4,'Canada Dry','Refrescante bebida de color dorado con el sabor a ginger ale. Reconocida internacionalmente y con gran tradición en el mercado. Históricamente reconocida como el champagne de los refrescos.',30.5000,1,'canadadry.jpg',20,NULL),
+(16,7,'Twizzlers','Los Twizzlers son dulces largos y retorcidos, hechos de varios ingredientes, como el jarabe de maíz, y se asemejan al regaliz.',30.5000,1,'twizzlers.jpg',20,NULL),
+(17,7,'Nerds Gummy Clusters','Los Gummy Clusters vienen en combinación de sabores y teturas, saborizantes, crujientes, dulces, gomosos y la capacidad de tomarlo de un solo bocado. Los Rainbow Nerds rodean el centro afrutado y gomoso.',30.5000,1,'nerdsgummy.jpg',20,NULL),
+(18,7,'Sour Patch','Sour Patch Kids gomitas dulces con polvo acidito de sabores frutales.',30.5000,1,'sourpatch.jpg',20,NULL),
+(19,7,'Sweetarts','SweeTARTS ofrece su emocionante sacudida de sabor en una variedad de coloridas creaciones de dulces. Las cuerdas suaves y masticables SweeTARTS llevan la fusión clásica de sabor dulce y agrio un paso más allá, creando diversión flexible que es regaliz afrutado y SweeTARTS todo en uno.',30.5000,1,'sweetarts.jpg',20,NULL),
+(20,7,'AirHeads','Festivamente gomosas, tremendamente acidulada y llena de sabor de la fruta desajustar la diversión de Airheads! ',30.5000,1,'airheads.jpg',20,NULL),
+(26,8,'Tapatio','La salsa tiene un color rojizo vivo, con un ligero olor a picante amargo y un toque a ajo. El picante se desvanece en el paladar y queda un sabor de chile asado. Disponible. La salsa tiene un color rojizo vivo, con un ligero olor a picante amargo y un toque a ajo.',30.5000,1,'tapatio.jpg',20,NULL),
+(27,8,'Red Hot','Adquiere tu salsa Red Hot original en su presentación de 3.78 l Es la salsa ideal para la botana en tus fiestas o reuniones con los amigos. Está conformado por los siguientes ingredientes: Chile (pimienta de cayena), vinagre, agua, sal, ajo en polvo.',30.5000,1,'redhot.jpg',20,NULL),
+(28,8,'Sriracha','Esta salsa picante multiusos de color rojo brillante está hecha de chiles rojos, ajo, vinagre, sal y azúcar. La salsa es picante y picante con solo un toque de dulzura, lo que la distingue de las salsas picantes de la variedad de su jardín.',30.5000,1,'sriracha.jpg',20,NULL),
+(29,8,'Bufalo','La característica de la salsa Búfalo es que es picante y está elaborada a base de vinagre y mantequilla.',30.5000,1,'bufalo.jpg',20,NULL),
+(30,8,'Yahualica','Salsa picante producto Gourmet, chile de árbol yahualica, con denominación de origen en jalisco méxico 280 gr Mezcla perfecta de chile de árbol, ajonjolí, semillas de girasol, cacahuate tostados, aceite de oliva y un toque de ajo.',30.5000,1,'yahualica.jpg',20,NULL),
+(31,11,'Oreo Mint','La galleta Oreo que todos hemos amado y disfrutado desde siempre, pero ahora con un nuevo y especial relleno cremoso sabor menta que fue pensado y creado especialmente para ti que buscas continuamente una manera novedosa de tener y disfrutar un snack delicioso que conserve la inigualable calidad y único sabor de las galletas Oreo',30.5000,1,'oreomint.jpg',20,NULL),
+(32,11,'Pop Tarts','Tartas planas, rectangulares y prehorneadas hechas por la compañia Kellogg´s. Rellenas de dulce sellado entre dos capas de masa, algunas estan glaseadas y pueden comerse sin necesidad de ser calentadas.',30.5000,1,'poptarts.jpg',20,NULL),
+(33,11,'Cosmic Brownies','Los brownies cosmicos son panesillos ultra masticables con un rico glaseado dulce que esta salpicado de chispas crujientes de arcoiris.',30.5000,1,'cosmicbrownies.jpg',20,NULL),
+(34,11,'Chips Ahoy','¡Chips Ahoy! las galletas están llenas de chispas de chocolate horneadas en cada bocado. Están disponibles en variedades originales, masticables, gruesas, dulces y bajas en grasa. ¡Chips Ahoy! Las cookies están ampliamente disponibles en todo el mundo, en Asia, Europa, América Latina y América del Norte.',30.5000,1,'chipsahoy.jpg',20,NULL),
+(35,11,'Oreo Cakesters','OREO Cakesters Soft Snack Cakes son un delicioso toque horneado suave en un dulce clásico. Estos bocadillos OREO se rellenan con crema entre dos pasteles de chocolate, lo que los convierte en sabrosos bocadillos dulces para todas las edades.',30.5000,1,'oreocakesters.jpg',20,NULL),
+(36,12,'Lays Barbecue','Todo empieza con papas de campo, que se cocinan y condimentan a la perfección, y después les agregamos el dulzor picosito de la salsa BBQ para que cada LAYS® tenga una crocantes insuperable y sea deliciosa. Happiness in Every Bite.',30.5000,1,'laysbarbecue.jpg',20,NULL),
+(37,12,'Doritos Tapatio','Bolsa de 10.7 onzas de doritos taptio con sabor a tortilla, las papas fritas crujientes y la audacia hacen que los aperitivos DORITOS sean impresionantes e ideales para tu despensa ',30.5000,1,'doritostapatio.jpg',20,NULL),
+(38,12,'Funyuns Flamin Hot','Los aros FUNYUNS sabor a cebolla, son una botana deliciosamente diferente a cualquier otra, con una textura crujiente y un sabroso sabor.',30.5000,1,'funyuns.jpg',20,NULL),
+(39,12,'Fritos Twists','Bolsa de fragmentos de maíz con sabor a miel para barbacoa 4,25 oz. Snacks de maíz trenzado, divertido para aperitivos.',30.5000,1,'fritostwists.jpg',20,NULL),
+(40,12,'Pringles Cheese','No usamos cualquier sabor de queso en las papas fritas con queso cheddar Pringles. Elegimos queso cheddar, el rey de los quesos. Así que incluso podrías decir que es un sabor real. Es tan majestuosamente bueno que no querrás mencionárselo a tus amigos intolerantes a la lactosa.',30.5000,1,'pringlescheese.jpg',20,NULL);
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -433,4 +468,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-30 21:24:29
+-- Dump completed on 2022-11-06 12:05:57

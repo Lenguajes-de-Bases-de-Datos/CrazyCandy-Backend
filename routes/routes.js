@@ -38,20 +38,7 @@ rutasProtegidas.use((req, res, next) => {
     }
 
 
-    // if (token) {
-    //   jwt.verify(token, app.get('llave'), (err, decoded) => {      
-    //     if (err) {
-    //       return res.json({ mensaje: 'Token inválida' });    
-    //     } else {
-    //       req.decoded = decoded;    
-    //       next();
-    //     }
-    //   });
-    // } else {
-    //   res.send.json({ 
-    //       mensaje: 'Token no proveída.' 
-    //   });
-    // }
+   
 
 
  });
@@ -85,7 +72,7 @@ router.post('/login', async(req, res)=> {
         // });
        
         var token = jwt.sign(payload,mykey,{
-             expiresIn:'10m'
+             expiresIn:'1m'
           })
   
 
@@ -156,7 +143,51 @@ router.get('/validate',(req,res,next)=>{
     }
 
 });
+router.post('/extender',async (req,res)=>{
+  try{
+    var user = req.body;
+    var resp = await query.query(`SELECT * FROM usuario WHERE email='${user.nombre}' and password='${user.password}'`);
+    if(resp.length>0){//significa que se autentica correctamente...
+      //generamos el token...
+      
+      json = JSON.stringify(resp); 
+      console.log(json);
+      parse=JSON.parse(json)
+     
+      mykey = configs.llave;
+      let payload = {
+        user:parse[0].email,
+        id:parse[0].ID,
+        privilegios:parse[0].privilegios,
+        sucursal:parse[0].ID_sucursal,
+        time:Date()
+      };
+      let datos = parse[0];
+      // const token = jwt.sign(payload,mykey,{
+      //   expiresIn:'30s'
+      // });
+     
+      var token = jwt.sign(payload,mykey,{
+           expiresIn:'10m'
+        })
 
+
+      console.log("tok: "+token)
+      res.send({
+        msg:token,
+        datos:datos
+      });
+      //generamos el token...
+    
+
+      
+    }else{
+      res.send({
+        msg:undefined
+      });
+    }
+  }catch(err){console.log("err2")}
+});
 router.post('/logout',(req,res)=>{
 
 
