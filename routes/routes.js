@@ -3,6 +3,12 @@ const app = express();
 const router = express.Router();
 var redis = require('redis');
 var JWTR = require('jwt-redis').default;
+var fs = require("fs");
+var multipart = require('connect-multiparty');
+const dir = '../ProyectoFinal-Front-end-/src/assets/productos';
+var multipartMiddleware = multipart({
+  uploadDir:`${dir}`
+});
 
  var jwt=require("jsonwebtoken");
 
@@ -261,6 +267,24 @@ router.get('/consultas',(req,res)=>{
   }).catch((err)=>{
     console.log(err);
   });
+});
+
+////SUBIR IMAGEN A PRODUCTO
+router.post('/api/subir', multipartMiddleware,(req, res)=>{
+  let archivos=req.files.uploads;
+  //se trae el array de archivos
+  for (let i=0; i<archivos.length;++i){
+      // Reescribe el archivo
+      fs.rename(archivos[i].path, `${dir}/${archivos[i].name}`, () => { 
+          console.log("\nFile Renamed!\n"); 
+      }); 
+  }
+  res.json({
+      'message':'Fichero subido correctamente!',
+      'archivo':req.files
+  });
+
+  console.log(req.files);
 });
 
 module.exports=router;
