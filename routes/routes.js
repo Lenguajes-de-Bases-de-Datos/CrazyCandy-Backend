@@ -3,6 +3,12 @@ const app = express();
 const router = express.Router();
 var redis = require('redis');
 var JWTR = require('jwt-redis').default;
+var fs = require("fs");
+var multipart = require('connect-multiparty');
+const dir = '../ProyectoFinal-Front-end-/src/assets/productos';
+var multipartMiddleware = multipart({
+  uploadDir:`${dir}`
+});
 
  var jwt=require("jsonwebtoken");
 
@@ -246,6 +252,29 @@ router.post('/consulta-uncategoria',rutasProtegidas,(req,res)=>{
   let sql = `SELECT * FROM categoria WHERE id=${req.body.id}`;
 });
 
+router.post('/readUser',(req,res)=>{
+  let sql="";
+  console.log(req.body);
+  let nombre = req.body.nombre;
+  let id = req.body.id;
+  if(nombre!=null){
+    sql = `SELECT b.*, a.ID FROM nombresusuario a, usuario b where a.nom_comp like '%${nombre}%' and b.ID=a.ID`;
+    console.log("Se fue por el nombre");
+  }else{
+    sql = `SELECT * FROM usuario where id=${id}`;
+    console.log("Se fue por el ID");
+  }
+  
+  query.query(sql).then((resp)=>{
+    let results = JSON.stringify(resp); 
+    console.log(results);
+    res.send({resultado: results, 
+              band:true});
+  }).catch((err)=>{
+    console.log(err);
+  });
+});
+
 
 router.post('/accion',(req,res)=>{
   console.log(req.body.sql);
@@ -269,6 +298,24 @@ router.get('/consultas',(req,res)=>{
   }).catch((err)=>{
     console.log(err);
   });
+});
+
+////SUBIR IMAGEN A PRODUCTO
+router.post('/api/subir', multipartMiddleware,(req, res)=>{
+  let archivos=req.files.uploads;
+  //se trae el array de archivos
+  for (let i=0; i<archivos.length;++i){
+      // Reescribe el archivo
+      fs.rename(archivos[i].path, `${dir}/${archivos[i].name}`, () => { 
+          console.log("\nFile Renamed!\n"); 
+      }); 
+  }
+  res.json({
+      'message':'Fichero subido correctamente!',
+      'archivo':req.files
+  });
+
+  console.log(req.files);
 });
 
 module.exports=router;
