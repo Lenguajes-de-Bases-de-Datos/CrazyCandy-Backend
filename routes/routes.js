@@ -3,6 +3,12 @@ const app = express();
 const router = express.Router();
 var redis = require('redis');
 var JWTR = require('jwt-redis').default;
+var fs = require("fs");
+var multipart = require('connect-multiparty');
+const dir = '../ProyectoFinal-Front-end-/src/assets/productos';
+var multipartMiddleware = multipart({
+  uploadDir:`${dir}`
+});
 
  var jwt=require("jsonwebtoken");
 
@@ -76,6 +82,7 @@ router.post('/login', async(req, res)=> {
           user:parse[0].email,
           id:parse[0].ID,
           privilegios:parse[0].privilegios,
+          sucursal:parse[0].ID_sucursal,
           time:Date()
         };
         let datos = parse[0];
@@ -177,6 +184,84 @@ router.get('/readSucursal',rutasProtegidas,(req,res)=>{
    let sql = `SELECT b.id,a.estado,a.ciudad,a.colonia,b.calle,b.numero FROM ubicacion a,sucursal b WHERE a.id=b.id_ubicacion`; 
    query.query(sql).then((resp)=>{
     let results = JSON.stringify(resp); 
+    
+    res.send(results);
+  }).catch((err)=>{
+    console.log(err);
+  });
+});
+//##################################################
+//################################################
+///parte de categoria....
+router.post('/insertar-categoria',rutasProtegidas,(req,res)=>{
+  let sql = `INSERT INTO categoria(id,ncategoria,pasilloInicio,pasilloFin) VALUES 
+  (id,'${req.body.nombre}',${req.body.pasilloInicio},${req.body.pasilloFin})`;
+  query.query(sql).then((resp)=>{
+    console.log("1 record insert successfully");
+    res.send({band:true});
+  }).catch((err)=>{
+    console.log(err);
+  });
+
+});
+router.get('/consultar-categorias',rutasProtegidas,(req,res)=>{
+  let sql = `SELECT * FROM categoria`;
+  query.query(sql).then((resp)=>{
+    let results = JSON.stringify(resp); 
+    console.log(results);
+    res.send(results);
+  }).catch((err)=>{
+    console.log(err);
+  });
+
+});
+
+router.post('/consulta-uncategoria',rutasProtegidas,(req,res)=>{
+
+  let sql = `SELECT * FROM categoria WHERE id=${req.body.id}`;
+});
+
+router.post('/readUser',(req,res)=>{
+  let sql="";
+  console.log(req.body);
+  let nombre = req.body.nombre;
+  let id = req.body.id;
+  if(nombre!=null){
+    sql = `SELECT b.*, a.ID FROM nombresusuario a, usuario b where a.nom_comp like '%${nombre}%' and b.ID=a.ID`;
+    console.log("Se fue por el nombre");
+  }else{
+    sql = `SELECT * FROM usuario where id=${id}`;
+    console.log("Se fue por el ID");
+  }
+  
+  query.query(sql).then((resp)=>{
+    let results = JSON.stringify(resp); 
+    console.log(results);
+    res.send({resultado: results, 
+              band:true});
+  }).catch((err)=>{
+    console.log(err);
+  });
+});
+
+
+router.post('/accion',(req,res)=>{
+  console.log(req.body.sql);
+  query.query(req.body.sql).then((resp)=>{
+    console.log("1 record insert successfully");
+    res.send({band:true});
+  }).catch((err)=>{
+    console.log(err);
+    res.send({band:false,errno:err.errno});
+  });
+
+
+});
+router.get('/consultas',(req,res)=>{
+
+  let sql = req.query.sql;
+  query.query(sql).then((resp)=>{
+    let results = JSON.stringify(resp); 
     console.log(results);
     res.send(results);
   }).catch((err)=>{
@@ -184,25 +269,22 @@ router.get('/readSucursal',rutasProtegidas,(req,res)=>{
   });
 });
 
-router.post('/readUser',(req,res)=>{
-  let nombre = req.body.user;
-  let id = req.body.id_user;
-  //params = req.params;
-  //console.log("body"+req.body);
-  //let sql = `SELECT nom_comp FROM nombres where nom_comp like '%${req.nom}%`;
-  console.log("Nombre: "+nombre+" Id: "+id);
-  console.log("BODY "+req.body.user);
-  console.log("PARAMS "+req.params.user+"     "+req.params.id_user)
-  let sql = `SELECT * FROM usuario`;
-  /*query.query(sql).then((resp)=>{
-    let results = JSON.stringify(resp); 
-    console.log(results);
-    res.send(results);
-  }).catch((err)=>{
-    console.log(err);
-  });*/
+////SUBIR IMAGEN A PRODUCTO
+router.post('/api/subir', multipartMiddleware,(req, res)=>{
+  let archivos=req.files.uploads;
+  //se trae el array de archivos
+  for (let i=0; i<archivos.length;++i){
+      // Reescribe el archivo
+      fs.rename(archivos[i].path, `${dir}/${archivos[i].name}`, () => { 
+          console.log("\nFile Renamed!\n"); 
+      }); 
+  }
+  res.json({
+      'message':'Fichero subido correctamente!',
+      'archivo':req.files
+  });
+
+  console.log(req.files);
 });
-
-
 
 module.exports=router;
