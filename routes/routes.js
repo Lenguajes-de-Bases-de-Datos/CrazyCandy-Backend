@@ -250,5 +250,20 @@ router.post('/api/subir', multipartMiddleware,(req, res)=>{
 
   console.log(req.files);
 });
+//Borrar la imagen del producto porque se actualizo
+router.post('/api/borrar', (req, res)=>{
+  let nombre = req.body.nombre;
+  //Elimina el archvio que se ele indico 
+  let band=true;
+  fs.unlink(`${dir}/${nombre}`, (error)=>{
+    if(error){
+      band=false;
+    }
+  });
+  console.log(req.body);
+  res.send({
+    band:band
+  });
+});
 
 module.exports=router;
