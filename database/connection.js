@@ -7,9 +7,11 @@ var con = mysql.createConnection({
   database: "crazycandy",
   port: 3306
 });
+var band=false;
+  con.connect(function(err) {
+    if (err){ band=false;throw err;}
+    band=true;console.log("Connected!");
+  });
+  
 
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-});
 module.exports={mysql,con};

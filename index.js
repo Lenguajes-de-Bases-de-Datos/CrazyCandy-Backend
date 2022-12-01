@@ -31,19 +31,19 @@ io.on("connection", function (socket) {
   }else{
     room = JSON.parse(room)
     socket.join(`room_${room}`);
-    console.log("usuario unido a room_"+room);
+    //console.log("usuario unido a room_"+room);
     let j = messages.findIndex(p => p.room == `room_${room}`);
     if(j!=-1){
       io.to(socket.id).emit('messages',messages[j].msgs);
     }
-    console.log("j: "+j);
+    //console.log("j: "+j);
     
   }
-  console.log("Un cliente se ha conectado"+room);
+  //console.log("Un cliente se ha conectado"+room);
   //socket.join();
   socket.on("msg",(res)=>{
     let aux = res;
-    console.log("msg:"+ JSON.stringify(res));
+    //console.log("msg:"+ JSON.stringify(res));
     let obj = {
       author:aux.author,
       text:aux.text,
