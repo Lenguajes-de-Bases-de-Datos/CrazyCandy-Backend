@@ -1,11 +1,24 @@
 var mysql = require('mysql');
 
+// var con = mysql.createConnection({
+//   host: "3.229.212.243",
+//   user: "candy",
+//   password: "cr4Z1",
+//   database: "crazycandy",
+//   port: 3306,
+// });
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
+<<<<<<< HEAD
   password: "1234",
   database: "crazycandy",
   port: "3308"
+=======
+  password: "root",
+  database: "crazycandy",
+  port: 3306,
+>>>>>>> master
 });
 var band=false;
   con.connect(function(err) {
