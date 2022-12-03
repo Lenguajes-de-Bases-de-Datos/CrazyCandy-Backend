@@ -19,52 +19,58 @@ const palabraSecretaProporcionadaPorUsuario="hol";
 const rondasDeSal = 10;
 
 var messages = [
-  {
-    author: "Carlos",
-    text: "Hola! que tal?",
-    cont:1
-  },
-  {
-    author: "Pepe",
-    text: "Muy bien! y tu??",
-    cont:1
-  },
-  {
-    author: "Paco",
-    text: "Genial!",
-    cont:1
-  },
-  {
-    author: "Cris",
-    text: "YAAA!!",
-    cont:1
-  },
+  
 ];
 
 
 io.on("connection", function (socket) {
   
-  socket.emit("messages", messages);
   let {room} = socket.handshake.query;
   if(!room){
     console.log("query vacio...")
   }else{
     room = JSON.parse(room)
     socket.join(`room_${room}`);
-    console.log("usuario unido a room_"+room);
-
+    //console.log("usuario unido a room_"+room);
+    let j = messages.findIndex(p => p.room == `room_${room}`);
+    if(j!=-1){
+      io.to(socket.id).emit('messages',messages[j].msgs);
+    }
+    //console.log("j: "+j);
+    
   }
-  console.log("Un cliente se ha conectado"+room);
+  //console.log("Un cliente se ha conectado"+room);
   //socket.join();
   socket.on("msg",(res)=>{
     let aux = res;
-    console.log("msg:"+ JSON.stringify(res));
+    //console.log("msg:"+ JSON.stringify(res));
     let obj = {
       author:aux.author,
       text:aux.text,
       count:1,
       room:aux.room
     };
+    let i = messages.findIndex(p => p.room == `room_${res.room}` );
+    if(i!=-1){
+      messages[i].msgs.push({
+        author: aux.author,
+        text: aux.text,
+        count:1
+          
+      });
+    }else{
+      messages.push(
+        { 
+          room:`room_${res.room}`,
+          msgs:[{
+          author: aux.author,
+          text: aux.text,
+          count:1
+          
+        }]
+      }
+      );
+    }
     //socket.broadcast.in(`room_${res.room}`).emit('notification',res);
     io.to(`room_${res.room}`).emit('notification',res);
     //socket.broadcast.emit('notification',res);

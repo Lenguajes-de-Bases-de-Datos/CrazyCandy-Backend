@@ -25,12 +25,12 @@ rutasProtegidas.use((req, res, next) => {
   const token = req.headers['crazys'];
   if(token){
     jwt.verify(token,mykey,(err,decoded)=>{
-      console.log("Rutas protegidas: ");
+      //console.log("Rutas protegidas: ");
       if (err) {
-        console.log("SI: ");
+        //console.log("SI: ");
         res.status(401).json({ mensaje: 'Token inválida '+err });       
       } else {
-        console.log("NOP: ");
+        //console.log("NOP: ");
         req.decoded = decoded;    
         next();
          
@@ -74,7 +74,7 @@ router.post('/login', async(req, res)=> {
         //generamos el token...
         
         json = JSON.stringify(resp); 
-        console.log(json);
+        //console.log(json);
         parse=JSON.parse(json)
        
         mykey = configs.llave;
@@ -95,7 +95,7 @@ router.post('/login', async(req, res)=> {
           })
   
 
-        console.log("tok: "+token)
+        //console.log("tok: "+token)
         res.send({
           msg:token,
           datos:datos
@@ -150,7 +150,7 @@ router.get('/validate',(req,res,next)=>{
         return res.status(401).json({ mensaje: 'Token inválida '+err });    
       } else {
         req.decoded = decoded;    
-        console.log("decoded: "+decoded.time);
+        //console.log("decoded: "+decoded.time);
         // next();
         return res.send({mensaje:"successfully"});
       }
@@ -163,10 +163,16 @@ router.get('/validate',(req,res,next)=>{
 
 });
 
-router.post('/logout',(req,res)=>{
+/* router.post('/logout',(req,res)=>{
+      
+    }else{
+      res.send({
+        msg:undefined
+      });
+    }
+  }catch(err){console.log("err2")}
+}); */
 
-
-});
 router.post('/insertUser',rutasProtegidas,(req,res)=>{
   params = req.params;
   console.log("body"+req.body)
@@ -180,70 +186,6 @@ router.post('/insertUser',rutasProtegidas,(req,res)=>{
     console.log(err);
   })
 });
-router.get('/readSucursal',rutasProtegidas,(req,res)=>{
-   let sql = `SELECT b.id,a.estado,a.ciudad,a.colonia,b.calle,b.numero FROM ubicacion a,sucursal b WHERE a.id=b.id_ubicacion`; 
-   query.query(sql).then((resp)=>{
-    let results = JSON.stringify(resp); 
-    
-    res.send(results);
-  }).catch((err)=>{
-    console.log(err);
-  });
-});
-//##################################################
-//################################################
-///parte de categoria....
-router.post('/insertar-categoria',rutasProtegidas,(req,res)=>{
-  let sql = `INSERT INTO categoria(id,ncategoria,pasilloInicio,pasilloFin) VALUES 
-  (id,'${req.body.nombre}',${req.body.pasilloInicio},${req.body.pasilloFin})`;
-  query.query(sql).then((resp)=>{
-    console.log("1 record insert successfully");
-    res.send({band:true});
-  }).catch((err)=>{
-    console.log(err);
-  });
-
-});
-router.get('/consultar-categorias',rutasProtegidas,(req,res)=>{
-  let sql = `SELECT * FROM categoria`;
-  query.query(sql).then((resp)=>{
-    let results = JSON.stringify(resp); 
-    console.log(results);
-    res.send(results);
-  }).catch((err)=>{
-    console.log(err);
-  });
-
-});
-
-router.post('/consulta-uncategoria',rutasProtegidas,(req,res)=>{
-
-  let sql = `SELECT * FROM categoria WHERE id=${req.body.id}`;
-});
-
-router.post('/readUser',(req,res)=>{
-  let sql="";
-  console.log(req.body);
-  let nombre = req.body.nombre;
-  let id = req.body.id;
-  if(nombre!=null){
-    sql = `SELECT b.*, a.ID FROM nombresusuario a, usuario b where a.nom_comp like '%${nombre}%' and b.ID=a.ID`;
-    console.log("Se fue por el nombre");
-  }else{
-    sql = `SELECT * FROM usuario where id=${id}`;
-    console.log("Se fue por el ID");
-  }
-  
-  query.query(sql).then((resp)=>{
-    let results = JSON.stringify(resp); 
-    console.log(results);
-    res.send({resultado: results, 
-              band:true});
-  }).catch((err)=>{
-    console.log(err);
-  });
-});
-
 
 router.post('/accion',(req,res)=>{
   console.log(req.body.sql);
@@ -262,7 +204,7 @@ router.get('/consultas',(req,res)=>{
   let sql = req.query.sql;
   query.query(sql).then((resp)=>{
     let results = JSON.stringify(resp); 
-    console.log(results);
+    //console.log(results);
     res.send(results);
   }).catch((err)=>{
     console.log(err);
@@ -285,6 +227,21 @@ router.post('/api/subir', multipartMiddleware,(req, res)=>{
   });
 
   console.log(req.files);
+});
+//Borrar la imagen del producto porque se actualizo
+router.post('/api/borrar', (req, res)=>{
+  let nombre = req.body.nombre;
+  //Elimina el archvio que se ele indico 
+  let band=true;
+  fs.unlink(`${dir}/${nombre}`, (error)=>{
+    if(error){
+      band=false;
+    }
+  });
+  console.log(req.body);
+  res.send({
+    band:band
+  });
 });
 
 module.exports=router;

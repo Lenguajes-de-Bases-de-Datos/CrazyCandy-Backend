@@ -6,7 +6,7 @@ const {mysql,con}=require("./connection");
       return new Promise((resolve,reject)=>{
         con.query(sql
             , function (err, result,fields) {
-            console.log("1")
+            //console.log("1")
                 if (err) reject(err);
                     resolve(result);
             }
