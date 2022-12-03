@@ -17,7 +17,7 @@ const query = require('../database/querys');
 //middleware
 const rutasProtegidas = express.Router(); 
 rutasProtegidas.use((req, res, next) => {
-    // const token = req.headers['access-token'];
+    
 
   let tokenHeaderKey = 'crazys';
   let mykey = configs.llave;
@@ -25,19 +25,19 @@ rutasProtegidas.use((req, res, next) => {
   const token = req.headers['crazys'];
   if(token){
     jwt.verify(token,mykey,(err,decoded)=>{
-      //console.log("Rutas protegidas: ");
+     
       if (err) {
-        //console.log("SI: ");
+        
         res.status(401).json({ mensaje: 'Token inválida '+err });       
       } else {
-        //console.log("NOP: ");
+        
         req.decoded = decoded;    
         next();
          
       }
     });
   }else {
-    console.log("Token np: ");
+    
       res.send({ 
           mensaje: 'Token no proveída.' 
       });
@@ -61,7 +61,7 @@ router.post('/login', async(req, res)=> {
         //generamos el token...
         
         json = JSON.stringify(resp); 
-        //console.log(json);
+        
         parse=JSON.parse(json)
        
         mykey = configs.llave;
@@ -73,16 +73,14 @@ router.post('/login', async(req, res)=> {
           time:Date()
         };
         let datos = parse[0];
-        // const token = jwt.sign(payload,mykey,{
-        //   expiresIn:'30s'
-        // });
+        
        
         var token = jwt.sign(payload,mykey,{
              expiresIn:'1m'
           })
   
 
-        //console.log("tok: "+token)
+        
         res.send({
           msg:token,
           datos:datos
@@ -97,12 +95,7 @@ router.post('/login', async(req, res)=> {
         });
       }
     }catch(err){console.log("err2")}
-    //  if(result){
-  //   console.log(result);
-
-  //  }else{
-  //   console.log("datos erroneos")
-  //  } 
+  
    
 });
 router.post('/generate',(req,res)=>{
@@ -112,9 +105,7 @@ router.post('/generate',(req,res)=>{
     id:1,
     time:Date()
   };
-  // const token = jwt.sign(payload,mykey,{
-
-  // });
+  
 
   const token = jwt.sign(payload,mykey).then((token)=>{
 
@@ -137,8 +128,7 @@ router.get('/validate',(req,res,next)=>{
         return res.status(401).json({ mensaje: 'Token inválida '+err });    
       } else {
         req.decoded = decoded;    
-        //console.log("decoded: "+decoded.time);
-        // next();
+       
         return res.send({mensaje:"successfully"});
       }
     });
@@ -157,7 +147,7 @@ router.post('/extender',async (req,res)=>{
       //generamos el token...
       
       json = JSON.stringify(resp); 
-      console.log(json);
+      
       parse=JSON.parse(json)
      
       mykey = configs.llave;
@@ -169,16 +159,14 @@ router.post('/extender',async (req,res)=>{
         time:Date()
       };
       let datos = parse[0];
-      // const token = jwt.sign(payload,mykey,{
-      //   expiresIn:'30s'
-      // });
+    
      
       var token = jwt.sign(payload,mykey,{
            expiresIn:'10m'
         })
 
 
-      console.log("tok: "+token)
+      
       res.send({
         msg:token,
         datos:datos
@@ -210,9 +198,9 @@ router.post('/insertUser',rutasProtegidas,(req,res)=>{
 });
 
 router.post('/accion',(req,res)=>{
-  console.log(req.body.sql);
+  
   query.query(req.body.sql).then((resp)=>{
-    console.log("1 record insert successfully");
+    
     res.send({band:true});
   }).catch((err)=>{
     console.log(err);
@@ -240,7 +228,7 @@ router.post('/api/subir', multipartMiddleware,(req, res)=>{
   for (let i=0; i<archivos.length;++i){
       // Reescribe el archivo
       fs.rename(archivos[i].path, `${dir}/${archivos[i].name}`, () => { 
-          console.log("\nFile Renamed!\n"); 
+          
       }); 
   }
   res.json({
@@ -248,7 +236,7 @@ router.post('/api/subir', multipartMiddleware,(req, res)=>{
       'archivo':req.files
   });
 
-  console.log(req.files);
+  
 });
 //Borrar la imagen del producto porque se actualizo
 router.post('/api/borrar', (req, res)=>{
@@ -260,7 +248,7 @@ router.post('/api/borrar', (req, res)=>{
       band=false;
     }
   });
-  console.log(req.body);
+  
   res.send({
     band:band
   });
