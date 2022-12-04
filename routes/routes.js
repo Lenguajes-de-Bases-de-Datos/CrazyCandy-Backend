@@ -44,23 +44,10 @@ rutasProtegidas.use((req, res, next) => {
     }
 
 
-    // if (token) {
-    //   jwt.verify(token, app.get('llave'), (err, decoded) => {      
-    //     if (err) {
-    //       return res.json({ mensaje: 'Token inválida' });    
-    //     } else {
-    //       req.decoded = decoded;    
-    //       next();
-    //     }
-    //   });
-    // } else {
-    //   res.send.json({ 
-    //       mensaje: 'Token no proveída.' 
-    //   });
-    // }
-
 
  });
+
+
 
 
 
@@ -152,8 +139,6 @@ router.get('/validate',(req,res,next)=>{
     }
 
 });
-<<<<<<< HEAD
-=======
 router.post('/extender',async (req,res)=>{
   try{
     var user = req.body;
@@ -187,18 +172,16 @@ router.post('/extender',async (req,res)=>{
         datos:datos
       });
       //generamos el token...
-    
->>>>>>> master
-
-/* router.post('/logout',(req,res)=>{
       
+    
+    
     }else{
       res.send({
         msg:undefined
       });
     }
   }catch(err){console.log("err2")}
-}); */
+}); 
 
 router.post('/insertUser',rutasProtegidas,(req,res)=>{
   params = req.params;

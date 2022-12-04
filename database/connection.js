@@ -10,15 +10,15 @@ var mysql = require('mysql');
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
-<<<<<<< HEAD
+
   password: "1234",
   database: "crazycandy",
   port: "3308"
-=======
-  password: "root",
-  database: "crazycandy",
-  port: 3306,
->>>>>>> master
+
+  //password: "root",
+  //database: "crazycandy",
+  //port: 3306,
+
 });
 var band=false;
   con.connect(function(err) {
