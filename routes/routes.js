@@ -76,7 +76,7 @@ router.post('/login', async(req, res)=> {
         
        
         var token = jwt.sign(payload,mykey,{
-             expiresIn:'1m'
+             expiresIn:'10m'
           })
   
 

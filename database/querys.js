@@ -16,6 +16,9 @@ const {mysql,con}=require("./connection");
  
     
 }
+// setInterval(()=>{
+//     query("Select now() from dual");
+// },15000);
 function encrypt(secret){
    return bcrypt.hash(secret,10,(err,result)=>{
         if(err){
