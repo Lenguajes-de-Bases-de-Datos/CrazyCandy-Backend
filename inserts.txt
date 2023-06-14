@@ -1,23 +1,23 @@
 
 //Insert para ubicación
-(id,'Aguascalientes','Aguascalientes','Fatima','20130'),
-(id,'Chihuahua','Chihuahua','Independencia','2000'),
-(id,'Chihuahua','Ahumada','Revolución','15243'),
-(id,'Aguascalientes','San pancho','Reales','79896'),
-(id,'Aguascalientes','Calvillo','Rio azul','78410'),
-(id,'Cd Mexico','Gustavo A. Madero','Juarez','14569'),
-(id,'Cd Mexico','Iztapalapa','Zaragoza','74183'),
-(id,'Michoacan','Morelia','Estudiantes','43197'),
-(id,'Michoacan','Uruapan','Hidalgo','93752'),
-(id,'Zacatecas','Guadalupe','Revolucion','97453'),
-(id,'Aguascalientes','Aguascalientes','Sab J. Arenal','20130'),
-(id,'California USA','Los Angeles','Misuri','75123'),
+(id,'aguascalientes','Aguascalientes','Fatima','20130'),
+(id,'chihuahua','Chihuahua','Independencia','2000'),
+(id,'chihuahua','Ahumada','Revolución','15243'),
+(id,'aguascalientes','San pancho','Reales','79896'),
+(id,'aguascalientes','Calvillo','Rio azul','78410'),
+(id,'cdmx','Gustavo A. Madero','Juarez','14569'),
+(id,'cdmx','Iztapalapa','Zaragoza','74183'),
+(id,'sinaloa','Morelia','Estudiantes','43197'),
+(id,'sinaloa','Uruapan','Hidalgo','93752'),
+(id,'zacatecas','Guadalupe','Revolucion','97453'),
+(id,'aguascalientes','Aguascalientes','Sab J. Arenal','20130'),
+(id,'california USA','Los Angeles','Misuri','75123'),
 (id,'Minnesota USA','Minneapolis','Central ave SE','55407'),
 (id,'Yuzhong China','Lanzhou','Gansu','730199'),
 (id,'Nagano Japon','Sako','Nakagomi','30201')
 
 //Insert para sucursal.
-(id,11,'Av. Universidad',630,'449-145-78-95','crazyuni@gmail.com',1,'9:00:00','22:00:00'),
+(id,11,'Av. Universidad',630,'449-145-78-95','crzyuni@gmail.com',1,'9:00:00','22:00:00'),
 (id,2,'Heroes',455,'659-458-75-15','crazyheroes@gmail.com',1,'9:00:00','21:00:00'),
 (id,3,'Caracas',758,'659-784-12-51','crazycaracas@gmail.com',1,'9:00:00','22:00:00'),
 (id,4,'Hernan',65,'449-821-46-52','crazypancho@gmail.com',1,'9:00:00','21:00:00'),
@@ -28,12 +28,20 @@
 (id,10,'Villa',145,'496-784-96-32','crazyzac@gmail.com',1,'9:00:00','21:00:00'),
 (id,1,'Av. Interceptor',888,'449-872-45-98','crazyint@gmail.com',1,'9:00:00','22:00:00')
 
+
+
+insert into usuario (id_sucursal,password,nombre,appat,apmat,privilegios,des,email,status,activo,imagen,telefono,salario,genero,fecha) values
+(1,sha2('hola123',256),'Hector','Perez','Lopez','reponedor','Tiempo completo','he1@outlook.com',1,0,'default.png','449-789-52-45',7000.5,'m',now()),
+(1,sha2('ana123',256),'Ana Maria','Reyes','Hernandez','vendedor','Tiempo medio','Maraes@protonmail.com',1,0,'default.png','449-852-78-44',8500,'f',now()),
+(1,sha2('juan673',256),'Juan Carlos','Alonso','Bravo','administrador','Tiempo completo','Juka@gmail.com',1,0,'default.png','449-874-00-41',12000,'m',now()),
+(1,sha2('rock45',256),'Ricardo','Perez','Reynoso','almacenista','Tiempo completo','Riki@gmail.com',1,0,'default.png','449-478-08-45',8500,'m',now()),
+(1,sha2('Sam14',256),'Samantha','Esparragoza','Delgado','vendedor','Tiempo completo','Sami@gmail.com',1,0,'default.png','449-144-80-78',8500,'f',now());
 //insert para usuario...
-(id,1,sha2('hola123',256),'Hector','Perez','Lopez','reponedor','Tiempo completo','hect11@outlook.com',1,0,'default.png','449-789-52-45',7000.5,'m',now()),
-(id,1,sha2('ana123',256),'Ana Maria','Reyes','Hernandez','vendedor','Tiempo medio','Mariaes@protonmail.com',1,0,'default.png','449-852-78-44',8500,'f',now()),
-(id,1,sha2('juan673',256),'Juan Carlos','Alonso','Bravo','administrador','Tiempo completo','Juka@gmail.com',1,0,'default.png','449-874-00-41',12000,'m',now()),
-(id,1,sha2('rock45',256),'Ricardo','Perez','Reynoso','almacenista','Tiempo completo','Riki@gmail.com',1,0,'default.png','449-478-08-45',8500,'m',now()),
-(id,1,sha2('Sam14',256),'Samantha','Esparragoza','Delgado','vendedor','Tiempo completo','Sami@gmail.com',1,0,'default.png','449-144-80-78',8500,'f',now()),
+(1,sha2('hola123',256),'Hector','Perez','Lopez','reponedor','Tiempo completo','hect1@outlook.com',1,0,'default.png','449-789-52-45',7000.5,'m',now()),
+(1,sha2('ana123',256),'Ana Maria','Reyes','Hernandez','vendedor','Tiempo medio','Mariaes@protonmail.com',1,0,'default.png','449-852-78-44',8500,'f',now()),
+(1,sha2('juan673',256),'Juan Carlos','Alonso','Bravo','administrador','Tiempo completo','Juka@gmail.com',1,0,'default.png','449-874-00-41',12000,'m',now()),
+(1,sha2('rock45',256),'Ricardo','Perez','Reynoso','almacenista','Tiempo completo','Riki@gmail.com',1,0,'default.png','449-478-08-45',8500,'m',now()),
+(1,sha2('Sam14',256),'Samantha','Esparragoza','Delgado','vendedor','Tiempo completo','Sami@gmail.com',1,0,'default.png','449-144-80-78',8500,'f',now());
 (id,1,sha2('Manuel123',256),'Manuel','Bravo','Cisneros','almacenista','Tiempo completo','Manue@gmail.com',1,0,'default.png','449-150-47-44',8500,'m',now()),
 (id,1,sha2('Teresa121',256),'Teresa','Villalpando','Cruz','reponedor','Tiempo completo','Tere11@outlook.com',1,0,'default.png','449-754-05-01',7000.5,'f',now()),
 (id,1,sha2('kiri12',256),'Kirito','Honda','Akiriyama','vendedor','Tiempo completo','Kiri56@gmail.com',1,0,'default.png','449-044-87-47',8500,'m',now()),
@@ -53,11 +61,11 @@
 (id,2,sha2('Mabel11',256),'Mabel','Magon','Hernandez','almacenista','Tiempo completo.','Mabii12@gmail.com',1,0,'default.png','685-951-03-08',8500,'f',now())
 
 //insert proveedores...
-(id,10,'Dulces de la Rosa','Juan','Reynoso','Higareda','Mijarez',788,'Proveedor por mayoreo.','Delarosa11@outlook.com',1,'496-996-88-77'),
-(id,12,'Super sweets','Smith','White','Brady','Life',411,'Proveedor extranjero por mayoreo.','sweets12@gmail.com',1,'814-78-95-66'),
-(id,15,'Dulces Japoneses','Asuna','Kiribama','Yahoko','Esencia',777,'Proveedor extranjero.','Djapon@gmail.com',1,'267-54-70-11'),
-(id,14,'Dulces Chinos','Kasuto','Atoriyama','Kamazaky','Legendaria',877,'Proveedor extranjero.','Dchinos@gmail.com',1,'241-881-77-22'),
-(id,13,'Tasty sweets','Tom','Staham','Freed','Shine',72,'Proveedor extranjero.','TastySweets@gmail.com',1,'805-557-44-88')
+(id,4,'Dulces de la Rosa','Juan','Reynoso','Higareda','Mijarez',788,'Proveedor por mayoreo.','Delarosa11@outlook.com',1,'496-996-88-77'),
+(id,1,'Super sweets','Smith','White','Brady','Life',411,'Proveedor extranjero por mayoreo.','sweets12@gmail.com',1,'814-78-95-66'),
+(id,4,'Dulces Japoneses','Asuna','Kiribama','Yahoko','Esencia',777,'Proveedor extranjero.','Djapon@gmail.com',1,'267-54-70-11'),
+(id,1,'Dulces Chinos','Kasuto','Atoriyama','Kamazaky','Legendaria',877,'Proveedor extranjero.','Dchinos@gmail.com',1,'241-881-77-22'),
+(id,11,'Tasty sweets','Tom','Staham','Freed','Shine',72,'Proveedor extranjero.','TastySweets@gmail.com',1,'805-557-44-88')
 
 
 //insert categoria....
@@ -75,11 +83,11 @@
 (id,'Papas',24,24,1)
 
 //insert producto...
-(id,1,'Caja de Mazapanes','',30.5,1,'mazapan.jpg',20)
+(id,1,'Caja de Mazapanes','',30.5,1,'mazapan.jpg',20),
 (id,1,'Caja de Mazapanes de Chocolate','',40.5,1,'mazapan-chocolate.jpg',20)
 
 
-insert into producto(id,categoria,nombre,descripcion,precioUnitario,status,imagen,piezas) values (id,1,'Caja de Mazapanes','',30.5,1,'mazapan.jpg',20);
+insert into producto8(id,categoria,nombre,descripcion,precioUnitario,status,imagen,piezas) values (id,1,'Caja de Mazapanes','',30.5,1,'mazapan.jpg',20);
 
 //insert Samantha
 //chocolates
@@ -87,44 +95,32 @@ insert into producto(id,categoria,nombre,descripcion,precioUnitario,status,image
 (id,1,'Chocolate Ghirardelli','Clasico sabor de chocolate con leche acompañado de caramelo suave, hecho con manteca de cacao y con relleno de caramelo cremoso una combinacion unica',20.5,1,'ghirardelli.jpg',20),
 (id,1,'Chocolate Twix','Barra de chocolate compuesta de galleta en el centro, cubierta de caramelo y recubierta de chocolate con leche.',15,1,'twix.jpg',20),
 (id,1,'Chocolate Whoppers','Bolitas de leche malteada cubiertas por una cobertura de chocolate artificial',22,1,'whoppers.png',20),
-(id,1,'Chocolate Almond Joy','Cuando tu diente dulce golpea espontáneamente, hay una cosa que seguramente lo satisface: coco, almendras enteras y chocolate.',18,1,'almond.jpg',20);
-
-//cheetos
+(id,1,'Chocolate Almond Joy','Cuando tu diente dulce golpea espontáneamente, hay una cosa que seguramente lo satisface: coco, almendras enteras y chocolate.',18,1,'almond.jpg',20),
 (id,3,'Cheetos Puffs','El intenso sabor a queso con una textura liviana y esponjosa. Los CHEETOS® inflados, bocadillos sabor a queso, están llenos de sabor y ¡hechos con queso de verdad!',13,1,'cheetospuffs.png',20),
-(id,3,'Cheetos Flamin Hot','Un sabor picante y especiado en un bocadillo crocante y con queso. Los CHEETOS® FLAMIN HOT® crocantes, bocadillos sabor a queso, están llenos de sabor y hechos con queso de verdad.',14,1,'cheetosflamin.jpg',20),
+(id,3,'Cheetos Flamin Hot','Un sabor picante y especiado en un bocadillo crocante y con queso. Los CHEETOS® FLAMIN HOT® crocantes, bocadillos sabor a queso, están llenos de sabor y hechos con queso de verdad.',14,1,'cheetosflamin.jpg',20);
 (id,3,'Cheetos Crunchy','Con una bolsa de CHEETOS® crocantes, bocadillos sabor a queso, tendrás algo delicioso, con queso y crujiente para picar. Están hechos con queso de verdad para darle muchísimo más sabor.',18.4,1,'cheetoscrunchy.jpg',20),
 (id,3,'Cheetos XXtra Flamin Hot','El sabor extrapicante y condimentado comprimido en estos bocadillos crujientes y con queso hará que te suba la temperatura. Sentirás mucho más picor con los CHEETOS® XXTRA FLAMIN HOT® crocantes, bocadillos sabor a queso.',21.45,1,'cheetosxxtra.jpg',20),
 (id,3,'Cheetos PopCorn','El delicioso sabor de CHEETOS® ahora viene en el clásico bocadillo que les gusta a todos: ¡las palomitas de maíz! Traen lo que ya conoces y te encanta de los CHEETOS® originales: un rico y delicioso sabor a mucho queso. Ya están listas para salir de la bolsa, con un toque extra de diversión llena de sabor, picardía y queso.',14.3,1,'cheetospopcorn.png',20),
-
-//bebidas
 (id,4,'Mtn Dew','Original Mountain Dew es un refresco con sabor a cítricos . El refresco es único porque incluye una pequeña cantidad de jugo de naranja. Si bien algunos han comparado a Mountain Dew con el refresco de lima-limón, es en gran medida distinto y único de ellos, y ha generado muchos imitadores propios.',17,1,'mtndew.jpg',20),
 (id,4,'Dr Pepper','Dr Pepper es un refresco carbonatado . Fue creado en la década de 1880 por el farmacéutico Charles Alderton en Waco, Texas, y se sirvió por primera vez alrededor de 1885.',12.5,1,'drpepper.jpg',20),
 (id,4,'Fanta Berry','Descubre este nuevo sabor de Fanta importado de los Estados Unidos. Tiene un sabor afrutado a frambuesa azul. Bebida con gas sin cafeína.',13.3,1,'fantaberry.jpg',20),
 (id,4,'Crush','Crush ofrece una excitante ráfaga de sabor y diversión en cada sorbo. Como el refresco de naranja original, Crush tiene una larga historia de deleitar a los consumidores con una amplia gama de sabores afrutados que complacen a la multitud.',15.4,1,'crush.jpg',20),
 (id,4,'Canada Dry','Refrescante bebida de color dorado con el sabor a ginger ale. Reconocida internacionalmente y con gran tradición en el mercado. Históricamente reconocida como el champagne de los refrescos.',16.8,1,'canadadry.jpg',20),
-
-//dulces americanos
 (id,7,'Twizzlers','Los Twizzlers son dulces largos y retorcidos, hechos de varios ingredientes, como el jarabe de maíz, y se asemejan al regaliz.',15.5,1,'twizzlers.jpg',20),
 (id,7,'Nerds Gummy Clusters','Los Gummy Clusters vienen en combinación de sabores y teturas, saborizantes, crujientes, dulces, gomosos y la capacidad de tomarlo de un solo bocado. Los Rainbow Nerds rodean el centro afrutado y gomoso.',12.5,1,'nerdsgummy.jpg',20),
 (id,7,'Sour Patch','Sour Patch Kids gomitas dulces con polvo acidito de sabores frutales.',22.2,1,'sourpatch.jpg',20),
 (id,7,'Sweetarts','SweeTARTS ofrece su emocionante sacudida de sabor en una variedad de coloridas creaciones de dulces. Las cuerdas suaves y masticables SweeTARTS llevan la fusión clásica de sabor dulce y agrio un paso más allá, creando diversión flexible que es regaliz afrutado y SweeTARTS todo en uno.',15.2,1,'sweetarts.jpg',20),
-(id,7,'AirHeads','Festivamente gomosas, tremendamente acidulada y llena de sabor de la fruta desajustar la diversión de Airheads! ',14,1,'airheads.jpg',20);
-
-//salsas
+(id,7,'AirHeads','Festivamente gomosas, tremendamente acidulada y llena de sabor de la fruta desajustar la diversión de Airheads! ',14,1,'airheads.jpg',20),
 (id,8,'Tapatio','La salsa tiene un color rojizo vivo, con un ligero olor a picante amargo y un toque a ajo. El picante se desvanece en el paladar y queda un sabor de chile asado. Disponible. La salsa tiene un color rojizo vivo, con un ligero olor a picante amargo y un toque a ajo.',15,1,'tapatio.jpg',20),
 (id,8,'Red Hot','Adquiere tu salsa Red Hot original en su presentación de 3.78 l Es la salsa ideal para la botana en tus fiestas o reuniones con los amigos. Está conformado por los siguientes ingredientes: Chile (pimienta de cayena), vinagre, agua, sal, ajo en polvo.',11.5,1,'redhot.jpg',20),
 (id,8,'Sriracha','Esta salsa picante multiusos de color rojo brillante está hecha de chiles rojos, ajo, vinagre, sal y azúcar. La salsa es picante y picante con solo un toque de dulzura, lo que la distingue de las salsas picantes de la variedad de su jardín.',24,1,'sriracha.jpg',20),
 (id,8,'Bufalo','La característica de la salsa Búfalo es que es picante y está elaborada a base de vinagre y mantequilla.',21,1,'bufalo.jpg',20),
-(id,8,'Yahualica','Salsa picante producto Gourmet, chile de árbol yahualica, con denominación de origen en jalisco méxico 280 gr Mezcla perfecta de chile de árbol, ajonjolí, semillas de girasol, cacahuate tostados, aceite de oliva y un toque de ajo.',17,1,'yahualica.jpg',20);
-
-//postres
+(id,8,'Yahualica','Salsa picante producto Gourmet, chile de árbol yahualica, con denominación de origen en jalisco méxico 280 gr Mezcla perfecta de chile de árbol, ajonjolí, semillas de girasol, cacahuate tostados, aceite de oliva y un toque de ajo.',17,1,'yahualica.jpg',20),
 (id,11,'Oreo Mint','La galleta Oreo que todos hemos amado y disfrutado desde siempre, pero ahora con un nuevo y especial relleno cremoso sabor menta que fue pensado y creado especialmente para ti que buscas continuamente una manera novedosa de tener y disfrutar un snack delicioso que conserve la inigualable calidad y único sabor de las galletas Oreo',20,1,'oreomint.jpg',20),
 (id,11,'Pop Tarts','Tartas planas, rectangulares y prehorneadas hechas por la compañia Kellogg´s. Rellenas de dulce sellado entre dos capas de masa, algunas estan glaseadas y pueden comerse sin necesidad de ser calentadas.',19,1,'poptarts.jpg',20),
 (id,11,'Cosmic Brownies','Los brownies cosmicos son panesillos ultra masticables con un rico glaseado dulce que esta salpicado de chispas crujientes de arcoiris.',17.5,1,'cosmicbrownies.jpg',20),
 (id,11,'Chips Ahoy','¡Chips Ahoy! las galletas están llenas de chispas de chocolate horneadas en cada bocado. Están disponibles en variedades originales, masticables, gruesas, dulces y bajas en grasa. ¡Chips Ahoy! Las cookies están ampliamente disponibles en todo el mundo, en Asia, Europa, América Latina y América del Norte.',16.45,1,'chipsahoy.jpg',20),
-(id,11,'Oreo Cakesters','OREO Cakesters Soft Snack Cakes son un delicioso toque horneado suave en un dulce clásico. Estos bocadillos OREO se rellenan con crema entre dos pasteles de chocolate, lo que los convierte en sabrosos bocadillos dulces para todas las edades.',14.25,1,'oreocakesters.jpg',20);
-
-//papas
+(id,11,'Oreo Cakesters','OREO Cakesters Soft Snack Cakes son un delicioso toque horneado suave en un dulce clásico. Estos bocadillos OREO se rellenan con crema entre dos pasteles de chocolate, lo que los convierte en sabrosos bocadillos dulces para todas las edades.',14.25,1,'oreocakesters.jpg',20),
 (id,12,'Lays Barbecue','Todo empieza con papas de campo, que se cocinan y condimentan a la perfección, y después les agregamos el dulzor picosito de la salsa BBQ para que cada LAYS® tenga una crocantes insuperable y sea deliciosa. Happiness in Every Bite.',10.5,1,'laysbarbecue.jpg',20),
 (id,12,'Doritos Tapatio','Bolsa de 10.7 onzas de doritos taptio con sabor a tortilla, las papas fritas crujientes y la audacia hacen que los aperitivos DORITOS sean impresionantes e ideales para tu despensa ',14,1,'doritostapatio.jpg',20),
 (id,12,'Funyuns Flamin Hot','Los aros FUNYUNS sabor a cebolla, son una botana deliciosamente diferente a cualquier otra, con una textura crujiente y un sabroso sabor.',15,1,'funyuns.jpg',20),
