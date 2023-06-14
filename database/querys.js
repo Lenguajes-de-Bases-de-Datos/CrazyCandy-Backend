@@ -1,6 +1,6 @@
 // let sql = "INSERT INTO usuario(ID,nombre,password) VALUES(ID,'cris','"+palabraSecretaEncriptada+"')";
 const bcrypt = require("bcryptjs");
-const {mysql,con}=require("./connection");
+const {mysql,con,con2}=require("./connection");
  function query(sql){
 
       return new Promise((resolve,reject)=>{
@@ -15,6 +15,21 @@ const {mysql,con}=require("./connection");
     
  
     
+}
+function query2(sql){
+
+    return new Promise((resolve,reject)=>{
+      con2.query(sql
+          , function (err, result,fields) {
+          //console.log("1")
+              if (err) reject(err);
+                  resolve(result);
+          }
+      );
+    }) 
+  
+
+  
 }
 // setInterval(()=>{
 //     query("Select now() from dual");
@@ -42,7 +57,8 @@ function compare(input,password){
 }
 module.exports={
     'compare':compare,
-    'query':query
+    'query':query,
+    'query2':query2
 };
 //bycript
 // const palabraSecretaHasheada=bcrypt.hash(palabraSecretaTextoPlano, rondasDeSal, (err, palabraSecretaEncriptada) => {

@@ -57,6 +57,7 @@ router.post('/login', async(req, res)=> {
     try{
       var user = req.body;
       var resp = await query.query(`SELECT * FROM usuario WHERE email='${user.nombre}' and password=sha2('${user.password}',256)`);
+      console.log("si")
       if(resp.length>0){//significa que se autentica correctamente...
         //generamos el token...
         
@@ -196,6 +197,46 @@ router.post('/insertUser',rutasProtegidas,(req,res)=>{
     console.log(err);
   })
 });
+
+
+router.get('/vistaProducto',(req,res)=>{
+
+  query.query2("select * from vistaProducto").then((resp)=>{
+    let results = JSON.stringify(resp);
+    res.send(results);
+  }).catch((err)=>{
+    console.log("Error en end-point vistaProducto: " + err);
+  });
+
+
+});
+
+router.get('/vistaCategoria',(req,res)=>{
+
+  query.query2("select * from vistaCategoria").then((resp)=>{
+    let results = JSON.stringify(resp);
+    res.send(results);
+  }).catch((err)=>{
+    console.log("Error en end-point vistaCategoria: " + err);
+  });
+
+
+});
+
+
+router.get('/vistaSucursal',(req,res)=>{
+
+  query.query2("select * from vistaSucursal").then((resp)=>{
+    let results = JSON.stringify(resp);
+    res.send(results);
+  }).catch((err)=>{
+    console.log("Error en end-point vistaSucursal: " + err);
+  });
+
+
+});
+
+
 
 router.post('/accion',(req,res)=>{
   
