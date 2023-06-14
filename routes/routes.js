@@ -225,8 +225,8 @@ router.get('/vistaCategoria',(req,res)=>{
 
 
 router.get('/vistaSucursal',(req,res)=>{
-
-  query.query2("select * from vistaSucursal").then((resp)=>{
+  
+  query.query2("select s.id,concat(u.estado,' ',u.ciudad,' ',u.colonia) as id_ubicacion,s.calle,s.email,s.numero,s.horarioap,s.horariocierre,s.telefono,s.status from vistaSucursal s,ubicacion u where s.id_ubicacion=u.id").then((resp)=>{
     let results = JSON.stringify(resp);
     res.send(results);
   }).catch((err)=>{
